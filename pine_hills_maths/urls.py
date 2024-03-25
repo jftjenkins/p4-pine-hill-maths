@@ -19,6 +19,7 @@ from django.urls import path, include
 from maths_lessons import views as index_views
 
 urlpatterns = [
-    path('', index_views.index, name='index'),
-    path('admin/', admin.site.urls),
+    path('', index_views.index, name='index'), # Default index page
+    path('', include('maths_lessons.urls')), # Include URLs from the maths_lessons app
+    path('admin/', admin.site.urls), # Django admin site
 ]
