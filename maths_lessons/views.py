@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.views import generic
+from django.views.generic import TemplateView
 
-def index(request):
-    return HttpResponse("Hello, world!")
+class IndexView(TemplateView):
+    template_name = 'home.html'
 
-def maths_lessons_view(request):
-    # Your view logic here
-    return render(request, 'maths_lessons/lessons.html', context)
+class MathsLessonsView(TemplateView):
+    template_name = 'maths_lessons/lessons.html'

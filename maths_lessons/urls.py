@@ -1,7 +1,9 @@
 from django.urls import path
-from . import views
+from .views import IndexView, MathsLessonsView
 
 urlpatterns = [
+    # URL pattern for the index view
+    path('', IndexView.as_view(), name='home'),
     # URL pattern for the maths lessons view
-    path('lessons/', views.maths_lessons_view, name='maths_lessons'),
+    path('lessons/', MathsLessonsView.as_view(), name='maths_lessons'),
 ]

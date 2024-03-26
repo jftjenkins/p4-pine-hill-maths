@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from maths_lessons import views as index_views
+from maths_lessons.views import IndexView
 
 urlpatterns = [
-    path('', index_views.index, name='index'), # Default index page
-    path('', include('maths_lessons.urls')), # Include URLs from the maths_lessons app
-    path('admin/', admin.site.urls), # Django admin site
+    path('', IndexView.as_view(), name='home'),  # Home URL pattern
+    path('lessons/', include('maths_lessons.urls')),  # Include URLs from the maths_lessons app
+    path('admin/', admin.site.urls),  # Django admin site
 ]
