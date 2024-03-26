@@ -6,4 +6,4 @@ class IndexView(TemplateView):
     template_name = 'home.html'
 
 class MathsLessonsView(TemplateView):
-    template_name = 'maths_lessons/lessons.html'
+    template_name = 'lessons.html'
