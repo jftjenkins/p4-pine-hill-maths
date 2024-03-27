@@ -33,6 +33,10 @@
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
+                {% block signin_button %}
+                    <li><a href="{% url 'signin' %}" class="btn btn-primary">Sign In</a></li>
+                {% endblock %}
+
             </ul>
         </nav>
     </header>

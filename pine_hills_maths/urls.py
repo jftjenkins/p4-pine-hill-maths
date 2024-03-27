@@ -22,5 +22,6 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('', include('maths_lessons.urls')),  # Include URLs from the maths_lessons app
     path('about/', TemplateView.as_view(template_name="about.html"), name="about"),  # About page
+    path('signin/', TemplateView.as_view(template_name="signin.html"), name="signin"),  # Sign-in page
     path('admin/', admin.site.urls),  # Django admin site
 ]
