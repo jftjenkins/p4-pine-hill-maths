@@ -18,12 +18,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
-from maths_lessons.views import AdminLoginView
+from maths_lessons.views import IndexView, MathsLessonsView, AdminLoginView
+from student_auth.views import student_authenticate
 
 urlpatterns = [
-    path('', include('maths_lessons.urls')),
-    path('about/', TemplateView.as_view(template_name="about.html"), name="about"),
-    path('signin/', TemplateView.as_view(template_name="signin.html"), name="signin"),
-    path('admin/login/', AdminLoginView.as_view(), name='admin_login'),
-    path('admin/', admin.site.urls),
+    path('', IndexView.as_view(), name='home'),  # Home URL pattern
+    path('lessons/', MathsLessonsView.as_view(template_name="lessons.html"), name='maths_lessons'),  # Maths lessons URL pattern
+    path('student/login/', TemplateView.as_view(template_name="signin.html"), name='student_login'),  # Student login page
+    path('student/authenticate/', student_authenticate, name='student_authenticate'),  # Student authentication URL pattern
+    path('about/', TemplateView.as_view(template_name="about.html"), name="about"),  # About page
+    path('admin/login/', AdminLoginView.as_view(template_name="admin_login.html"), name='admin_login'),  # Admin login page
+    path('admin/', admin.site.urls),  # Django admin site
 ]
