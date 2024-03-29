@@ -22,4 +22,13 @@ class Student(models.Model):
                                         password=cls.generate_password())
         return cls.objects.create(user=user, username=user.username, password=user.password)
 
+class AdminLogin(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-timestamp']
+
+    def __str__(self):
+        return f"Admin login by {self.user.username} at {self.timestamp}"
 
