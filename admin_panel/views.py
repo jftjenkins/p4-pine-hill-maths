@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import AdminLogin
+from .models import AdminLogin, Student
+import random
+import string
 
 @login_required
 def admin_dashboard(request):
@@ -27,10 +29,13 @@ def manage_students(request):
 def create_student(request):
     """View function to create a new student user."""
     if request.method == 'POST':
-        # Logic to create a new student user based on form data
-        # Example: user = User.objects.create(username=request.POST['username'], password=request.POST['password'])
-        # Create an entry in the AdminLogin model to log the action
-        AdminLogin.objects.create(user=request.user, action='Created a new student user')
+        # Generate a unique username and password for the student user
+        username = Student.generate_unique_username()
+        password = Student.generate_unique_password()
+        # Create a new student user
+        student = Student.objects.create_student(username=username, password=password)
+        # Log the action
+        AdminLogin.objects.create(user=request.user, action=f'Created a new student user: {student.username}')
         messages.success(request, 'Student user created successfully.')
         return redirect('manage_students')
     else:
@@ -38,7 +43,7 @@ def create_student(request):
         return render(request, 'admin_panel/create_student.html')
 
 @login_required
-def view_student(request, student_id):
+def view_students(request, student_id):
     """View function to view details of a specific student user."""
     # Logic to retrieve and display details of the specified student user
     return render(request, 'admin_panel/view_student.html', {'student_id': student_id})
