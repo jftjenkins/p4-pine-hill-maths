@@ -13,15 +13,36 @@
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" class="form-control" required>
+            <div class="input-group">
+                <input type="password" id="password" name="password" class="form-control" required>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="toggle-password">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Sign In</button>
     </form>
-    <p class="text-danger" id="error-message" style="display: none;"></p>
+    <p id="error-message" class="text-danger text-center" style="display: none;"></p>
     <!-- Add anchor tag for redirection -->
     <a href="{% url 'admin_dashboard' %}" id="admin-link" style="display: none;"></a>
 </section>
 <script>
+    document.getElementById('toggle-password').addEventListener('click', function () {
+        var passwordField = document.getElementById('password');
+        var eyeIcon = document.querySelector('#toggle-password i');
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            eyeIcon.classList.remove('fa-eye');
+            eyeIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordField.type = 'password';
+            eyeIcon.classList.remove('fa-eye-slash');
+            eyeIcon.classList.add('fa-eye');
+        }
+    });
+
     document.querySelector('#login-form').addEventListener('submit', function (event) {
         event.preventDefault();
         // Check if the entered username and password are correct (Superadmin credentials)
@@ -31,7 +52,7 @@
             // Redirect to the admin panel
             document.getElementById('admin-link').click();
         } else {
-            // Show error message
+            // Show error message with anchor tag
             document.getElementById('error-message').innerHTML =
                 'Invalid username or password. Please try again or contact your department at <a href="mailto:info@pinehillsgs.com">info@pinehillsgs.com</a>.';
             document.getElementById('error-message').style.display = 'block';
