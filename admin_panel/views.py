@@ -3,11 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.views import View  # Import the View class
 from .models import AdminLogin, Student
 from .forms import AdminLoginForm  # Import the form for admin login
-import random
-import string
+import os
 
 @login_required
 def admin_dashboard(request):
@@ -57,39 +55,17 @@ def admin_login(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            # Authenticate the user against the superadmin account
-            user = authenticate(username=username, password=password)
-            if user is not None and user.is_superuser:
-                # Login the superadmin user
+            # Authenticate the user
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                # Login the user
                 login(request, user)
-                return redirect('admin_dashboard')
-            else:
-                # Display error message for invalid credentials
-                messages.error(request, 'Invalid username or password. Please try again.')
+                # Redirect to the appropriate dashboard based on user role
+                if username == os.environ.get("PHSTAFF_USERNAME") and password == os.environ.get("PHSTAFF_PASSWORD"):
+                    return redirect('admin_dashboard')
+                else:
+                    # Display error message for invalid credentials
+                    messages.error(request, 'Invalid username or password. Please try again.')
     else:
         form = AdminLoginForm()
     return render(request, 'admin_panel/admin_login.html', {'form': form})
-
-
-# Add the AdminLoginView class for rendering admin login page
-class AdminLoginView(View):
-    template_name = 'admin_panel/admin_login.html'
-
-    def get(self, request, *args, **kwargs):
-        form = AdminLoginForm()
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = AdminLoginForm(request.POST)
-        if form.is_valid():
-            # Handle form submission
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            # Verify superadmin credentials
-            if username == 'Superadmin' and password == 'superadmin_password':
-                # Redirect to admin dashboard
-                return redirect('admin_dashboard')
-            else:
-                # Display error message for invalid credentials
-                messages.error(request, 'Invalid username or password. Please try again.')
-        return render(request, self.template_name, {'form': form})
