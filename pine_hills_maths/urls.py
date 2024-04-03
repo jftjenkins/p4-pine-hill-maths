@@ -27,7 +27,6 @@ urlpatterns = [
     path('student/login/', TemplateView.as_view(template_name="signin.html"), name='student_login'),  # Student login page
     path('student/authenticate/', student_authenticate, name='student_authenticate'),  # Student authentication URL pattern
     path('about/', TemplateView.as_view(template_name="about.html"), name="about"),  # About page
-    path('admin/login/', AdminLoginView.as_view(template_name="admin_login.html"), name='admin_login'),  # Admin login page
     path('teacher/', include('admin_panel.urls')),  # Include admin_panel URLs
     path('admin/', admin.site.urls),  # Django admin site
 ]
