@@ -1,15 +1,9 @@
 from django import forms
+from .models import Teacher
 
-class AdminLoginForm(forms.Form):
-    username = forms.CharField(label='Username', max_length=100)
-    password = forms.CharField(label='Password', max_length=100, widget=forms.PasswordInput)
+class TeacherCreationForm(forms.ModelForm):
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
-    def clean(self):
-        cleaned_data = super().clean()
-        username = cleaned_data.get('username')
-        password = cleaned_data.get('password')
-
-        if not username:
-            raise forms.ValidationError("Username field is required.")
-        if not password:
-            raise forms.ValidationError("Password field is required.")
+    class Meta:
+        model = Teacher
+        fields = ('username', 'password')
