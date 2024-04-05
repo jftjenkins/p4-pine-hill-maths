@@ -41,13 +41,13 @@ def create_student(request):
         return redirect('manage_students')
     else:
         # Render the form to create a new student user
-        return render(request, 'admin_panel/create_student.html')
+        return render(request, 'admin_panel/create_students.html')
 
 # @login_required
 def view_students(request, student_id):
     """View function to view details of a specific student user."""
     # Logic to retrieve and display details of the specified student user
-    return render(request, 'admin_panel/view_student.html', {'student_id': student_id})
+    return render(request, 'admin_panel/view_students.html', {'student_id': student_id})
 
 def admin_login(request):
     if request.method == 'POST':

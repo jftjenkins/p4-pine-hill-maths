@@ -38,6 +38,7 @@ SECRET_KEY = SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ['8000-jftjenkins-p4pinehillma-51gne39ob2q.ws-eu110.gitpod.io', '.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['https://8000-jftjenkins-p4pinehillma-51gne39ob2q.ws-eu110.gitpod.io']
 
 
 # Application definition
