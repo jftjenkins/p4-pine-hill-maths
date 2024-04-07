@@ -25,8 +25,6 @@
         <button type="submit" class="btn btn-primary">Sign In</button>
     </form>
     <p id="error-message" class="text-danger text-center" style="display: none;"></p>
-    <!-- Add anchor tag for redirection -->
-    <a href="{% url 'admin_dashboard' %}" id="admin-link" style="display: none;"></a>
 </section>
 <script>
     document.getElementById('toggle-password').addEventListener('click', function () {
@@ -40,23 +38,6 @@
             passwordField.type = 'password';
             eyeIcon.classList.remove('fa-eye-slash');
             eyeIcon.classList.add('fa-eye');
-        }
-    });
-
-    document.querySelector('#login-form').addEventListener('submit', function (event) {
-        event.preventDefault();
-        var form = this;
-        var username = form.username.value;
-        var password = form.password.value;
-        if (username === '{{ PHSTAFF_USERNAME }}' && password === '{{ PHSTAFF_PASSWORD }}') {
-            // Redirect to the admin panel
-            form.action = "{% url 'admin_dashboard' %}";
-            form.submit();
-        } else {
-            // Show error message
-            document.getElementById('error-message').innerHTML =
-                'Invalid username or password. Please try again or contact your department at <a href="mailto:info@pinehillsgs.com">info@pinehillsgs.com</a>.';
-            document.getElementById('error-message').style.display = 'block';
         }
     });
 </script>

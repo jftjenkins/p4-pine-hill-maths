@@ -4,8 +4,41 @@
 
 {% block content %}
 <section>
-    <!-- Home page content -->
     <h1>Welcome to Pine Hills Grammar School</h1>
-    <p>This is the lessons page.</p>
+    <h2>Maths Lessons</h2>
+    <div class="lesson-categories">
+        <div class="lesson-category">
+            <h3>Addition</h3>
+            <ul>
+                <li><a href="{% url 'question_page' type='addition' difficulty='level_1' %}">Level 1</a></li>
+                <li><a href="{% url 'question_page' type='addition' difficulty='level_2' %}">Level 2</a></li>
+                <li><a href="{% url 'question_page' type='addition' difficulty='level_3' %}">Level 3</a></li>
+            </ul>
+        </div>
+        <div class="lesson-category">
+            <h3>Subtraction</h3>
+            <ul>
+                <li><a href="{% url 'question_page' type='subtraction' difficulty='level_1' %}">Level 1</a></li>
+                <li><a href="{% url 'question_page' type='subtraction' difficulty='level_2' %}">Level 2</a></li>
+                <li><a href="{% url 'question_page' type='subtraction' difficulty='level_3' %}">Level 3</a></li>
+            </ul>
+        </div>
+        <div class="lesson-category">
+            <h3>Multiplication</h3>
+            <ul>
+                <li><a href="{% url 'question_page' type='multiplication' difficulty='level_1' %}">Level 1</a></li>
+                <li><a href="{% url 'question_page' type='multiplication' difficulty='level_2' %}">Level 2</a></li>
+                <li><a href="{% url 'question_page' type='multiplication' difficulty='level_3' %}">Level 3</a></li>
+            </ul>
+        </div>
+        <div class="lesson-category">
+            <h3>Division</h3>
+            <ul>
+                <li><a href="{% url 'question_page' type='division' difficulty='level_1' %}">Level 1</a></li>
+                <li><a href="{% url 'question_page' type='division' difficulty='level_2' %}">Level 2</a></li>
+                <li><a href="{% url 'question_page' type='division' difficulty='level_3' %}">Level 3</a></li>
+            </ul>
+        </div>
+    </div>
 </section>
 {% endblock %}
