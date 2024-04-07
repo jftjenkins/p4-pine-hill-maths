@@ -7,18 +7,24 @@ def admin_login(request):
     if request.method == 'POST':
         form = TeacherCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            # Authenticate the user
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                # Login the user
                 login(request, user)
                 return redirect('admin_dashboard')
+            else:
+                # Invalid credentials
+                error_message = 'Invalid username or password. Please try again.'
+                return render(request, 'admin_panel/admin_login.html', {'form': form, 'error_message': error_message})
+        else:
+            # Form is not valid
+            return render(request, 'admin_panel/admin_login.html', {'form': form})
     else:
+        # GET request
         form = TeacherCreationForm()
-    return render(request, 'admin_panel/admin_login.html', {'form': form})
+        return render(request, 'admin_panel/admin_login.html', {'form': form})
+
 
 def admin_dashboard(request):
     return render(request, 'admin_panel/dashboard.html')

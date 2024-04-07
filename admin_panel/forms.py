@@ -6,4 +6,8 @@ class TeacherCreationForm(forms.ModelForm):
 
     class Meta:
         model = Teacher
-        fields = ('username', 'password')
+        fields = ('username', 'password', 'is_staff')  # Add 'is_staff' to fields
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['is_staff'].initial = True  # Set 'is_staff' to True by default

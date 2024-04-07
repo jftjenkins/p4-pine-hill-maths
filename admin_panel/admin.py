@@ -19,5 +19,8 @@ class TeacherAdmin(UserAdmin):
     search_fields = ('username',)
     ordering = ('username',)
 
+    # Set the verbose name for the admin section
+    verbose_name = 'Teacher'
+
 # Register the Teacher model with the custom admin class
 admin.site.register(Teacher, TeacherAdmin)
