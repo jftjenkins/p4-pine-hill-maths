@@ -18,11 +18,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from .views import logout_view, scorecard
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name="home.html"), name="home"),
-    path('student/', include('maths_lessons.urls')),
     path('about/', TemplateView.as_view(template_name="about.html"), name="about"),
-    path('teacher/', include('admin_panel.urls')),
+    path('logout/', logout_view, name='logout'),
+    path('scorecard/', scorecard, name='scorecard'),
+    path('student/', include('student.urls')),
+    path('teacher/', include('teacher.urls')),
     path('admin/', admin.site.urls),
+
 ]
