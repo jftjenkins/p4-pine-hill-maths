@@ -3,36 +3,36 @@
 {% block title %}Admin Dashboard - Pine Hills Grammar School{% endblock %}
 
 {% block content %}
-<section>
-    <h1 class="dashboard-heading">Admin Dashboard</h1>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Manage Students</h5>
-                    <p class="card-text">Manage student users and their progress.</p>
-                    <a href="{% url 'manage_students' %}" class="btn btn-primary">Manage</a>
+    <section>
+        <h1 class="dashboard-heading">Admin Dashboard</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">View Student Scorecard</h5>
+                        <p class="card-text">View existing student scorecard and their progress.</p>
+                        <a href="{% url 'scorecard' %}" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Create Student</h5>
+                        <p class="card-text">Create a new student user.</p>
+                        <a href="{% url 'create_students' %}" class="btn btn-primary">Create</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">View Students</h5>
+                        <p class="card-text">View existing student users.</p>
+                        <a href="{% url 'view_students' %}" class="btn btn-primary">View</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Create Student</h5>
-                    <p class="card-text">Create a new student user.</p>
-                    <a href="{% url 'create_students' %}" class="btn btn-primary">Create</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">View Students</h5>
-                    <p class="card-text">View existing student users.</p>
-                    <a href="{% url 'view_students' %}" class="btn btn-primary">View</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 {% endblock %}

@@ -1,49 +1,71 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+from .models import StudentForm
 from django.contrib import messages
-from .forms import TeacherCreationForm
-from .models import Teacher
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 
-def admin_login(request):
+
+# Create your views here.
+def teacher_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            
-            # Try to authenticate against the default User model
-            user = authenticate(request, username=username, password=password)
-            if user is None:
-                # Try to authenticate against the Teacher model
-                teacher = Teacher.objects.filter(username=username).first()
-                if teacher is not None and teacher.check_password(password):
-                    user = teacher
-                    
+            user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('admin_dashboard')  # Redirect all authenticated users to the admin dashboard
+                return redirect('dashboard')
             else:
                 # Invalid credentials
-                return redirect('admin_login')
+                error_message = 'Invalid username or password. Please try again.'
+                return render(request, 'teacher/teacher_login.html', {'form': form, 'error_message': error_message})
         else:
             # Form is not valid
-            error_message = 'Username or password is incorrect. If you are struggling to login, please contact <a href="mailto:ithelpdesk@pinehillsgs.com">ithelpdesk@pinehillsgs.com</a>.'
-            messages.error(request, error_message, extra_tags='safe')
-            return render(request, 'admin_panel/admin_login.html', {'form': form})
+            return render(request, 'teacher/teacher_login.html', {'form': form})
     else:
         # GET request
         form = AuthenticationForm()
-        return render(request, 'admin_panel/admin_login.html', {'form': form})
+        return render(request, 'teacher/teacher_login.html', {'form': form})
 
-def admin_dashboard(request):
-    return render(request, 'admin_panel/dashboard.html')
 
-def manage_students(request):
-    return render(request, 'admin_panel/manage_students.html')
+@login_required
+@staff_member_required
+def dashboard(request):
+    return render(request, 'teacher/dashboard.html')
 
+
+@login_required
+@staff_member_required
 def create_student(request):
-    return render(request, 'admin_panel/create_students.html')
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
 
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+
+            # Hash the password securely
+            hashed_password = make_password(password)
+
+            # Create new user with hashed password
+            new_user = User.objects.create(username=username, email=email, password=hashed_password)
+            new_user.save()
+
+            messages.success(request, 'Student added successfully.')
+            return render(request, 'teacher/create_students.html', {'form': form})
+    else:
+        form = StudentForm()
+    return render(request, 'teacher/create_students.html', {'form': form})
+
+
+@login_required
+@staff_member_required
 def view_students(request):
-    return render(request, 'admin_panel/view_students.html')
+    students = User.objects.filter(is_staff=False)  # Filter out staff members (teachers)
+    return render(request, 'teacher/view_students.html', {'students': students})

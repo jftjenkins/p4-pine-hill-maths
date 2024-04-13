@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard - Pine Hills Grammar School{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <h1 class="my-4">Student List</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Is Active</th>
+                    <!-- Add other fields you want to display -->
+                </tr>
+                </thead>
+                <tbody>
+                {% for student in students %}
+                    <tr>
+                        <td>{{ student.id }}</td>
+                        <td>{{ student.username }}</td>
+                        <td>{{ student.email }}</td>
+                        <td>{{ student.is_active }}</td>
+                        <!-- Add other fields you want to display -->
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

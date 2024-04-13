@@ -1,12 +1,9 @@
 from django.urls import path
 from . import views
-from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('login/', views.admin_login, name='admin_login'),
-    path('dashboard/', views.admin_dashboard, name='admin_dashboard'),
-    path('manage-students/', views.manage_students, name='manage_students'),
+    path('login/', views.teacher_login, name='teacher_login'),
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('create-students/', views.create_student, name='create_students'),
     path('view-students/', views.view_students, name='view_students'),
-    path('error/', TemplateView.as_view(template_name="404.html"), name='error')
 ]

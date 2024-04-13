@@ -1,27 +1,19 @@
+# Create your models here.
 from django.contrib.auth.models import AbstractUser
-from django.db import models
+from django.contrib.auth.models import User
+from django.forms import ModelForm, CharField, EmailField, ValidationError
 
-class Teacher(AbstractUser):
-    groups = models.ManyToManyField(
-        'auth.Group',
-        verbose_name='groups',
-        blank=True,
-        help_text='The groups this teacher belongs to.',
-        related_name='teachers_set',
-        related_query_name='teacher',
-    )
-    user_permissions = models.ManyToManyField(
-        'auth.Permission',
-        verbose_name='user permissions',
-        blank=True,
-        help_text='Specific permissions for this teacher.',
-        related_name='teachers_set',
-        related_query_name='teacher',
-    )
+
+class StudentForm(ModelForm):
+    username = CharField(label='username', max_length=150)
+    email = EmailField(label='Email address')
 
     class Meta:
-        verbose_name = 'Teacher'
-        verbose_name_plural = 'Teachers'
+        model = User
+        fields = ['username', 'password', 'email']  # Assuming Student model has these fields
 
-    def __str__(self):
-        return self.username
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise ValidationError("This email address is already in use.")
+        return email
