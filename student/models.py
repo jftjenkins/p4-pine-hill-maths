@@ -1,5 +1,9 @@
-from django.contrib.auth.models import User
 from django.db import models
+# Create your models here.
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
+
 
 # Model for representing maths lessons
 class MathsLesson(models.Model):
@@ -25,11 +29,16 @@ class MathsLesson(models.Model):
         return f"{self.get_difficulty_display()} {self.get_type_display()} Lesson"
 
 
-# Model for representing student progress in maths lessons
-class StudentProgress(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE)
-    lesson = models.ForeignKey(MathsLesson, on_delete=models.CASCADE)
-    completed = models.BooleanField(default=False)
+# Scorecard of student
+class ScoreCard(models.Model):
+    username = models.CharField(max_length=100, default='')
+    email = models.CharField(max_length=100, default='')
+
+    test_type = models.CharField(max_length=100)
+    difficulty = models.CharField(max_length=100)
+    total_questions = models.IntegerField()
+    score = models.IntegerField()
+    percentage_score = models.FloatField()
 
     def __str__(self):
-        return f"{self.student.username}'s Progress: {self.lesson}"
+        return f"{self.username} - {self.email} - {self.test_type} - {self.difficulty} - Score: {self.score}/{self.total_questions}"
