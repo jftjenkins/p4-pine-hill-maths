@@ -29,8 +29,8 @@ SECRET_KEY = SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['8000-jftjenkins-p4pinehillma-51gne39ob2q.ws-eu110.gitpod.io', '.herokuapp.com']
-CSRF_TRUSTED_ORIGINS = ['https://8000-jftjenkins-p4pinehillma-51gne39ob2q.ws-eu110.gitpod.io'] # Makes Django Admin work
+ALLOWED_HOSTS = ['8000-jftjenkins-p4pinehillma-auzwlq7fpku.ws-eu114.gitpod.io', '.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['https://8000-jftjenkins-p4pinehillma-auzwlq7fpku.ws-eu114.gitpod.io'] # Makes Django Admin work
 
 
 # Application definition

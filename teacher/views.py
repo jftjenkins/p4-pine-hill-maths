@@ -11,26 +11,21 @@ from django.contrib.auth.hashers import make_password
 
 # Create your views here.
 def teacher_login(request):
+    form = AuthenticationForm()
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(username=username, password=password)
-            if user is not None:
+            if user is not None and user.is_staff:
                 login(request, user)
                 return redirect('dashboard')
-            else:
-                # Invalid credentials
-                error_message = 'Invalid username or password. Please try again.'
-                return render(request, 'teacher/teacher_login.html', {'form': form, 'error_message': error_message})
-        else:
-            # Form is not valid
-            return render(request, 'teacher/teacher_login.html', {'form': form})
-    else:
-        # GET request
-        form = AuthenticationForm()
-        return render(request, 'teacher/teacher_login.html', {'form': form})
+
+            # Invalid credentials
+        messages.error(request, 'Invalid username or password for teacher login. Please try again.')
+
+    return render(request, 'teacher/teacher_login.html', {'form': form})
 
 
 @login_required
