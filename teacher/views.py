@@ -60,15 +60,19 @@ def view_students(request):
 def edit_student(request, student_id):
     student = get_object_or_404(User, id=student_id, is_staff=False)
     if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        student.username = username
-        student.email = email
-        student.save()
-        messages.success(request, 'Student updated successfully.')
-        return redirect('view_students')
-    return redirect('view_students')
-
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            student = form.save(commit=False)
+            password = form.cleaned_data.get('password')
+            if password:
+                student.password = make_password(password)
+            student.save()
+            messages.success(request, 'Student updated successfully.')
+            return redirect('view_students')
+    else:
+        form = StudentForm(instance=student)
+    return render(request, 'teacher/edit_student.html', {'form': form, 'student': student})
+    
 @login_required
 @staff_member_required
 def delete_student(request, student_id):

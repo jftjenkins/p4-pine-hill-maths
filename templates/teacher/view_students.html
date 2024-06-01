@@ -25,16 +25,13 @@
                     <td>{{ student.email }}</td>
                     <td>{{ student.is_active }}</td>
                     <td>
-                        <button class="btn btn-primary btn-sm" data-toggle="modal"
-                            data-target="#editStudentModal{{ student.id }}">Edit</button>
-                        <button class="btn btn-danger btn-sm" data-toggle="modal"
-                            data-target="#deleteStudentModal{{ student.id }}">Delete</button>
+                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editStudentModal{{ student.id }}">Edit</button>
+                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteStudentModal{{ student.id }}">Delete</button>
                     </td>
                 </tr>
 
                 <!-- Edit Student Modal -->
-                <div class="modal fade" id="editStudentModal{{ student.id }}" tabindex="-1" role="dialog"
-                    aria-labelledby="editStudentModalLabel{{ student.id }}" aria-hidden="true">
+                <div class="modal fade" id="editStudentModal{{ student.id }}" tabindex="-1" role="dialog" aria-labelledby="editStudentModalLabel{{ student.id }}" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -48,13 +45,16 @@
                                     {% csrf_token %}
                                     <div class="form-group">
                                         <label for="username{{ student.id }}">Username</label>
-                                        <input type="text" class="form-control" id="username{{ student.id }}"
-                                            name="username" value="{{ student.username }}" required>
+                                        <input type="text" class="form-control" id="username{{ student.id }}" name="username" value="{{ student.username }}" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="email{{ student.id }}">Email</label>
-                                        <input type="email" class="form-control" id="email{{ student.id }}" name="email"
-                                            value="{{ student.email }}" required>
+                                        <input type="email" class="form-control" id="email{{ student.id }}" name="email" value="{{ student.email }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password{{ student.id }}">Password</label>
+                                        <input type="password" class="form-control" id="password{{ student.id }}" name="password">
+                                        <small class="form-text text-muted">Leave blank to keep the current password.</small>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Save changes</button>
                                 </form>
@@ -64,8 +64,7 @@
                 </div>
 
                 <!-- Delete Student Modal -->
-                <div class="modal fade" id="deleteStudentModal{{ student.id }}" tabindex="-1" role="dialog"
-                    aria-labelledby="deleteStudentModalLabel{{ student.id }}" aria-hidden="true">
+                <div class="modal fade" id="deleteStudentModal{{ student.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteStudentModalLabel{{ student.id }}" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
