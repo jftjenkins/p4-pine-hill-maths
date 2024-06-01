@@ -4,31 +4,93 @@
 
 {% block content %}
 
-    <div class="container">
-        <h1 class="my-4">Student List</h1>
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <thead class="thead-dark">
+<div class="container">
+    <h1 class="my-4">Student List</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
                     <th>Username</th>
                     <th>Email</th>
                     <th>Is Active</th>
-                    <!-- Add other fields you want to display -->
+                    <th>Actions</th>
                 </tr>
-                </thead>
-                <tbody>
+            </thead>
+            <tbody>
                 {% for student in students %}
-                    <tr>
-                        <td>{{ student.id }}</td>
-                        <td>{{ student.username }}</td>
-                        <td>{{ student.email }}</td>
-                        <td>{{ student.is_active }}</td>
-                        <!-- Add other fields you want to display -->
-                    </tr>
+                <tr>
+                    <td>{{ student.id }}</td>
+                    <td>{{ student.username }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>{{ student.is_active }}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" data-toggle="modal"
+                            data-target="#editStudentModal{{ student.id }}">Edit</button>
+                        <button class="btn btn-danger btn-sm" data-toggle="modal"
+                            data-target="#deleteStudentModal{{ student.id }}">Delete</button>
+                    </td>
+                </tr>
+
+                <!-- Edit Student Modal -->
+                <div class="modal fade" id="editStudentModal{{ student.id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="editStudentModalLabel{{ student.id }}" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editStudentModalLabel{{ student.id }}">Edit Student</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="{% url 'edit_student' student.id %}">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="username{{ student.id }}">Username</label>
+                                        <input type="text" class="form-control" id="username{{ student.id }}"
+                                            name="username" value="{{ student.username }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email{{ student.id }}">Email</label>
+                                        <input type="email" class="form-control" id="email{{ student.id }}" name="email"
+                                            value="{{ student.email }}" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delete Student Modal -->
+                <div class="modal fade" id="deleteStudentModal{{ student.id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="deleteStudentModalLabel{{ student.id }}" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteStudentModalLabel{{ student.id }}">Delete Student</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete {{ student.username }}?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <form method="post" action="{% url 'delete_student' student.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Confirm</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {% endfor %}
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
+</div>
+
 {% endblock %}

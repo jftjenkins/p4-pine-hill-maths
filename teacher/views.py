@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
@@ -7,7 +7,6 @@ from .models import StudentForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
-
 
 # Create your views here.
 def teacher_login(request):
@@ -27,40 +26,55 @@ def teacher_login(request):
 
     return render(request, 'teacher/teacher_login.html', {'form': form})
 
-
 @login_required
 @staff_member_required
 def dashboard(request):
     return render(request, 'teacher/dashboard.html')
-
 
 @login_required
 @staff_member_required
 def create_student(request):
     if request.method == 'POST':
         form = StudentForm(request.POST)
-
         if form.is_valid():
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-
-            # Hash the password securely
             hashed_password = make_password(password)
-
-            # Create new user with hashed password
             new_user = User.objects.create(username=username, email=email, password=hashed_password)
             new_user.save()
-
             messages.success(request, 'Student added successfully.')
-            return render(request, 'teacher/create_students.html', {'form': form})
+            return redirect('create_student')
     else:
         form = StudentForm()
     return render(request, 'teacher/create_students.html', {'form': form})
 
-
 @login_required
 @staff_member_required
 def view_students(request):
-    students = User.objects.filter(is_staff=False)  # Filter out staff members (teachers)
+    students = User.objects.filter(is_staff=False)
     return render(request, 'teacher/view_students.html', {'students': students})
+
+@login_required
+@staff_member_required
+def edit_student(request, student_id):
+    student = get_object_or_404(User, id=student_id, is_staff=False)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        student.username = username
+        student.email = email
+        student.save()
+        messages.success(request, 'Student updated successfully.')
+        return redirect('view_students')
+    return redirect('view_students')
+
+@login_required
+@staff_member_required
+def delete_student(request, student_id):
+    student = get_object_or_404(User, id=student_id, is_staff=False)
+    if request.method == 'POST':
+        student.delete()
+        messages.success(request, 'Student deleted successfully.')
+        return redirect('view_students')
+    return redirect('view_students')
