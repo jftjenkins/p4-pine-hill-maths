@@ -2,16 +2,14 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.contrib.auth.decorators import login_required
-
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from .models import MathsLesson
+from .models import MathsLesson, ScoreCard
 from django.contrib.auth.forms import UserCreationForm
 import random
 from django.contrib.auth import get_user_model
-from .models import ScoreCard
 
 User = get_user_model()
 
@@ -74,13 +72,11 @@ def get_random_question(question_type, difficulty):
         questions.append({'question': question, 'answer': answer, 'index': index})
     return questions
 
-
 @login_required
 def get_question_page(request, question_type, difficulty):
     if request.method == 'GET':
         questions = get_random_question(question_type, difficulty)
-        return render(request, 'student/question_page.html', {'questions': questions})
-
+        return render(request, 'student/question_page.html', {'questions': questions, 'question_type': question_type, 'difficulty': difficulty})
 
     elif request.method == 'POST':
         questions = request.POST.getlist('question[]')
@@ -105,7 +101,7 @@ def get_question_page(request, question_type, difficulty):
                                'is_correct': is_correct})
 
         # Calculate percentage score
-        percentage_score = (score / total_marks) * 100
+        percentage_score = (score / total_marks) * 100 if total_marks > 0 else 0
 
         # Create a record in the database for the test result
         test_result = ScoreCard.objects.create(
@@ -118,4 +114,6 @@ def get_question_page(request, question_type, difficulty):
             percentage_score=percentage_score
         )
         test_result.save()
-        return render(request, 'student/question_page.html', {'questions': [], 'output': output})
+        return render(request, 'student/question_page.html', {'questions': [], 'output': output, 'question_type': question_type, 'difficulty': difficulty})
+
+

@@ -3,42 +3,48 @@
 {% block title %}Maths Question Page - Pine Hills Grammar School{% endblock %}
 
 {% block content %}
-    <section>
-        <h1>Maths Question Page</h1>
-        <!-- Add question content and answer form here -->
-        <form id="question-form" method="post">
-            {% csrf_token %}
-            <!-- Display each randomly generated question -->
-            {% for question in questions %}
-                <div class="question">
-                    <p>{{ question.question }}</p>
-                    <input type="hidden" name="correct_answer[]" value="{{ question.answer }}">
-                    <input type="hidden" name="question[]" value="{{ question.question }}">
-                    <input type="text" name="answers[]" required>
-                </div>
-            {% endfor %}
-            <button type="submit">Submit Answers</button>
-        </form>
+<section>
+    <h1>Maths Question Page</h1>
 
-        <!-- Display output for each question -->
-        {% if output %}
-            <div class="output">
-                <h2>Output:</h2>
-                <ul>
-                    {% for result in output %}
-                        <li>
-                            <p>Question: {{ result.question }}</p>
-                            <p>Correct Answer: {{ result.correct_answer }}</p>
-                            <p>User's Answer: {{ result.user_answer }}</p>
-                            {% if result.is_correct %}
-                                <p class="text-success">Result: Correct</p>
-                            {% else %}
-                                <p class="text-danger">Result: Incorrect</p>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-    </section>
+    {% if questions %}
+    <form id="question-form" method="post">
+        {% csrf_token %}
+        <!-- Display each randomly generated question -->
+        {% for question in questions %}
+        <div class="question">
+            <p>{{ question.question }}</p>
+            <input type="hidden" name="correct_answer[]" value="{{ question.answer }}">
+            <input type="hidden" name="question[]" value="{{ question.question }}">
+            <input type="text" name="answers[]" required>
+        </div>
+        {% endfor %}
+        <button type="submit">Submit Answers</button>
+    </form>
+    {% endif %}
+
+    <!-- Display output for each question -->
+    {% if output %}
+    <div class="output">
+        <h2>Output:</h2>
+        <ul>
+            {% for result in output %}
+            <li>
+                <p>Question: {{ result.question }}</p>
+                <p>Correct Answer: {{ result.correct_answer }}</p>
+                <p>User's Answer: {{ result.user_answer }}</p>
+                {% if result.is_correct %}
+                <p class="text-success">Result: Correct</p>
+                {% else %}
+                <p class="text-danger">Result: Incorrect</p>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="text-center mt-4">
+        <a href="{% url 'question_page' question_type=question_type difficulty=difficulty %}"
+            class="btn btn-try-again">Try Again</a>
+    </div>
+    {% endif %}
+</section>
 {% endblock %}

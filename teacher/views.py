@@ -62,8 +62,6 @@ def edit_student(request, student_id):
     if request.method == 'POST':
         form = StudentForm(request.POST, instance=student)
         if form.is_valid():
-            print("Form is valid")
-            print("Form data:", form.cleaned_data)
             student.username = form.cleaned_data['username']
             student.email = form.cleaned_data['email']
             password = form.cleaned_data.get('password')
