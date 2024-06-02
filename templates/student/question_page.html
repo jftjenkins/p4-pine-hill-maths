@@ -18,7 +18,7 @@
             <input type="text" name="answers[]" required>
         </div>
         {% endfor %}
-        <button type="submit">Submit Answers</button>
+        <button type="submit" class="btn btn-primary">Submit Answers</button>
     </form>
     {% endif %}
 
@@ -43,7 +43,7 @@
     </div>
     <div class="text-center mt-4">
         <a href="{% url 'question_page' question_type=question_type difficulty=difficulty %}"
-            class="btn btn-try-again">Try Again</a>
+            class="btn btn-primary">Try Again</a>
     </div>
     {% endif %}
 </section>
