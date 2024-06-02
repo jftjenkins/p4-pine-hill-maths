@@ -30,8 +30,7 @@ SECRET_KEY = SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ['8000-jftjenkins-p4pinehillma-auzwlq7fpku.ws-eu114.gitpod.io', '.herokuapp.com']
-CSRF_TRUSTED_ORIGINS = ['https://8000-jftjenkins-p4pinehillma-auzwlq7fpku.ws-eu114.gitpod.io'] # Makes Django Admin work
-
+CSRF_TRUSTED_ORIGINS = ['https://8000-jftjenkins-p4pinehillma-auzwlq7fpku.ws-eu114.gitpod.io']  # Makes Django Admin work
 
 # Application definition
 
@@ -109,7 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -123,7 +121,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -135,3 +132,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Session settings
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 1200  # 20 minutes (optional)
+

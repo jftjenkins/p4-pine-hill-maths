@@ -62,17 +62,23 @@ def edit_student(request, student_id):
     if request.method == 'POST':
         form = StudentForm(request.POST, instance=student)
         if form.is_valid():
-            student = form.save(commit=False)
+            print("Form is valid")
+            print("Form data:", form.cleaned_data)
+            student.username = form.cleaned_data['username']
+            student.email = form.cleaned_data['email']
             password = form.cleaned_data.get('password')
             if password:
                 student.password = make_password(password)
             student.save()
             messages.success(request, 'Student updated successfully.')
             return redirect('view_students')
+        else:
+            print("Form is not valid")
+            print("Form errors:", form.errors)
     else:
         form = StudentForm(instance=student)
-    return render(request, 'teacher/edit_student.html', {'form': form, 'student': student})
-    
+    return render(request, 'teacher/view_students.html', {'form': form, 'student': student})
+
 @login_required
 @staff_member_required
 def delete_student(request, student_id):
