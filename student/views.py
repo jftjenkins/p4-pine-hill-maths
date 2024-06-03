@@ -46,8 +46,20 @@ def get_random_question(question_type, difficulty):
         max_num = 20000
 
     for index in range(1, 11):
-        num1 = random.randint(min_num, max_num)
-        num2 = random.randint(min_num, max_num)
+        if question_type == "multiplication":
+            if difficulty == "level_1":
+                num1 = random.randint(1, 999)
+                num2 = random.randint(1, 10)
+            elif difficulty == "level_2":
+                num1 = random.randint(-999, 999)
+                num2 = random.randint(-10, 10)
+            else:  # Level 3 or others
+                num1 = random.randint(min_num, max_num)
+                num2 = random.randint(min_num, max_num)
+        else:
+            num1 = random.randint(min_num, max_num)
+            num2 = random.randint(min_num, max_num)
+
         if difficulty == "level_3":
             num1 = num1 / random.choice([1, 10, 100, 1000])
             num2 = num2 / random.choice([1, 10, 100, 1000])
