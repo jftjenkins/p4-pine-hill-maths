@@ -56,6 +56,18 @@ def get_random_question(question_type, difficulty):
             else:  # Level 3 or others
                 num1 = random.randint(min_num, max_num)
                 num2 = random.randint(min_num, max_num)
+        elif question_type == "division":
+            if difficulty == "level_1":
+                num2 = random.randint(1, 10)
+                num1 = num2 * random.randint(1, 100)
+            elif difficulty == "level_2":
+                num2 = random.randint(-10, 10)
+                if num2 == 0:  # Avoid division by zero
+                    num2 = 1
+                num1 = num2 * random.randint(-100, 100)
+            else:  # Level 3 or others
+                num1 = random.randint(min_num, max_num)
+                num2 = random.randint(1, 1000)
         else:
             num1 = random.randint(min_num, max_num)
             num2 = random.randint(min_num, max_num)
