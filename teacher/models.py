@@ -10,7 +10,6 @@ class StudentForm(ModelForm):
         label="Password",
         required=False,
         widget=forms.PasswordInput,
-        help_text="Leave blank to keep the current password.",
     )
 
     class Meta:
