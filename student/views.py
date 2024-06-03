@@ -1,18 +1,13 @@
-from django.shortcuts import render
-
-# Create your views here.
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .models import MathsLesson, ScoreCard
-from django.contrib.auth.forms import UserCreationForm
-import random
 from django.contrib.auth import get_user_model
+import random
 
 User = get_user_model()
-
 
 def student_login(request):
     if request.method == "POST":
@@ -32,13 +27,11 @@ def student_login(request):
         form = AuthenticationForm()
     return render(request, "student/signin.html", {"form": form})
 
-
 @login_required
 def get_all_lesson(request):
     # Retrieve all available maths lessons from the database
     lessons = MathsLesson.objects.all()
     return render(request, "student/lessons.html", {"lessons": lessons})
-
 
 def get_random_question(question_type, difficulty):
     min_num = 100
@@ -62,19 +55,20 @@ def get_random_question(question_type, difficulty):
             question = f"{num1} + {num2}"
             answer = str(num1 + num2)
         elif question_type == "subtraction":
-            question = f"{num1} -  {num2}"
+            if difficulty == "level_1":
+                num1, num2 = max(num1, num2), min(num1, num2)  # Ensure positive result
+            question = f"{num1} - {num2}"
             answer = str(num1 - num2)
         elif question_type == "multiplication":
             question = f"{num1} × {num2}"
             answer = str(num1 * num2)
         elif question_type == "division":
-            question = f"{num1} ÷  {num2}"
+            question = f"{num1} ÷ {num2}"
             answer = str(num1 / num2)
         else:
             continue
         questions.append({"question": question, "answer": answer, "index": index})
     return questions
-
 
 @login_required
 def get_question_page(request, question_type, difficulty):
@@ -115,7 +109,6 @@ def get_question_page(request, question_type, difficulty):
                         "is_correct": is_correct,
                     }
                 )
-
             except (ValueError, TypeError) as e:
                 output.append(
                     {
