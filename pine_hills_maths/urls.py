@@ -21,12 +21,15 @@ from django.views.generic import TemplateView
 from .views import logout_view, scorecard
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name="home.html"), name="home"),
-    path('about/', TemplateView.as_view(template_name="about.html"), name="about"),
-    path('logout/', logout_view, name='logout'),
-    path('scorecard/', scorecard, name='scorecard'),
-    path('student/', include('student.urls')),
-    path('teacher/', include('teacher.urls')),
-    path('admin/', admin.site.urls),
-
+    path("", TemplateView.as_view(template_name="home.html"), name="home"),
+    path(
+        "about/",
+        TemplateView.as_view(template_name="about.html"),
+        name="about",
+    ),
+    path("logout/", logout_view, name="logout"),
+    path("scorecard/", scorecard, name="scorecard"),
+    path("student/", include("student.urls")),
+    path("teacher/", include("teacher.urls")),
+    path("admin/", admin.site.urls),
 ]

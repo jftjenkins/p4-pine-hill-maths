@@ -1,4 +1,5 @@
 from django.db import models
+
 # Create your models here.
 from django.db import models
 from django.contrib.auth.models import AbstractUser
@@ -8,16 +9,16 @@ from django.contrib.auth.models import User
 # Model for representing maths lessons
 class MathsLesson(models.Model):
     DIFFICULTY_CHOICES = [
-        ('level_1', 'Level 1'),
-        ('level_2', 'Level 2'),
-        ('level_3', 'Level 3'),
+        ("level_1", "Level 1"),
+        ("level_2", "Level 2"),
+        ("level_3", "Level 3"),
     ]
 
     TYPE_CHOICES = [
-        ('addition', 'Addition'),
-        ('subtraction', 'Subtraction'),
-        ('multiplication', 'Multiplication'),
-        ('division', 'Division'),
+        ("addition", "Addition"),
+        ("subtraction", "Subtraction"),
+        ("multiplication", "Multiplication"),
+        ("division", "Division"),
     ]
 
     type = models.CharField(max_length=20, choices=TYPE_CHOICES)
@@ -31,8 +32,8 @@ class MathsLesson(models.Model):
 
 # Scorecard of student
 class ScoreCard(models.Model):
-    username = models.CharField(max_length=100, default='')
-    email = models.CharField(max_length=100, default='')
+    username = models.CharField(max_length=100, default="")
+    email = models.CharField(max_length=100, default="")
 
     test_type = models.CharField(max_length=100)
     difficulty = models.CharField(max_length=100)

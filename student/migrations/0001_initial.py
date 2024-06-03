@@ -7,31 +7,67 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='MathsLesson',
+            name="MathsLesson",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('type', models.CharField(choices=[('addition', 'Addition'), ('subtraction', 'Subtraction'), ('multiplication', 'Multiplication'), ('division', 'Division')], max_length=20)),
-                ('difficulty', models.CharField(choices=[('level_1', 'Level 1'), ('level_2', 'Level 2'), ('level_3', 'Level 3')], max_length=10)),
-                ('question', models.CharField(max_length=100)),
-                ('answer', models.CharField(max_length=50)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "type",
+                    models.CharField(
+                        choices=[
+                            ("addition", "Addition"),
+                            ("subtraction", "Subtraction"),
+                            ("multiplication", "Multiplication"),
+                            ("division", "Division"),
+                        ],
+                        max_length=20,
+                    ),
+                ),
+                (
+                    "difficulty",
+                    models.CharField(
+                        choices=[
+                            ("level_1", "Level 1"),
+                            ("level_2", "Level 2"),
+                            ("level_3", "Level 3"),
+                        ],
+                        max_length=10,
+                    ),
+                ),
+                ("question", models.CharField(max_length=100)),
+                ("answer", models.CharField(max_length=50)),
             ],
         ),
         migrations.CreateModel(
-            name='ScoreCard',
+            name="ScoreCard",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('username', models.CharField(default='', max_length=100)),
-                ('email', models.CharField(default='', max_length=100)),
-                ('test_type', models.CharField(max_length=100)),
-                ('difficulty', models.CharField(max_length=100)),
-                ('total_questions', models.IntegerField()),
-                ('score', models.IntegerField()),
-                ('percentage_score', models.FloatField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("username", models.CharField(default="", max_length=100)),
+                ("email", models.CharField(default="", max_length=100)),
+                ("test_type", models.CharField(max_length=100)),
+                ("difficulty", models.CharField(max_length=100)),
+                ("total_questions", models.IntegerField()),
+                ("score", models.IntegerField()),
+                ("percentage_score", models.FloatField()),
             ],
         ),
     ]
