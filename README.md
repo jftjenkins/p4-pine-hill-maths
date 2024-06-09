@@ -50,7 +50,7 @@ The development of this project followed Agile Methodology to ensure an iterativ
 
 ### Planning
 
-- **User Stories:** Created detailed user stories to capture the requirements and expectations from different users, including students and teachers.
+- **User Stories:** Created detailed user stories to capture the requirements and expectations from different users including students and teachers.
 - **Acceptance Criteria:** Each User Story contains Acceptance Criteria and an overview, some of which I had to add after I had already implemented them into my code as I was not sure what Acceptance Criteria would be required.
 - **Labels:** Used labels such as "Future Features", "May Have", and "Must Have" to prioritize tasks and features.
 
@@ -100,7 +100,7 @@ The structure of the Pine Hills Grammar School - Maths Department application is
 - **Dashboard:** Different dashboards for students and teachers, displaying relevant information and functionalities.
 - **Lesson Pages:** Categorized lessons with randomly generated questions to practice different maths skills.
 - **Scorecard:** A dedicated page for students to view their progress and for teachers to monitor student performance.
-- **Admin Panel:** For teachers to manage student accounts, reset passwords, and view analytics.
+- **Admin Panel:** For teachers to manage student accounts and reset passwords.
 
 #### Design Choices
 
@@ -220,7 +220,7 @@ These choices ensure that the application is not only functional but also visual
         Teachers Edit Student Page
     ![Teachers Student Management Page](images/teacher%20edit%20student%20module.png)
 
-        Teachers Delete Student Page
+        Teachers Delete Student page
     ![Teachers Delete Student Page](images/teacher%20delete%20student%20module.png)
 
     </details>
@@ -273,7 +273,7 @@ These choices ensure that the application is not only functional but also visual
     </details>
 
 - **Add New Student:**
-  - Only teachers are able to access this part using their login details.
+  - Only teachers are able to access this part using there login details.
   - Teachers can add new students to the database.
   - Form validation ensures accurate data entry.
   - New students are added to the system and can immediately start using the platform.
@@ -281,7 +281,7 @@ These choices ensure that the application is not only functional but also visual
 - **Quiz and Question Generation:**
   - Both teachers and students can access this page through the student login page.
   - Questions are randomly generated for different difficulty levels and types (addition, subtraction, multiplication, division).
-  - Custom logic ensures appropriate difficulty and correct answer formats eg. All division questions at Level 1 and 2 will give integer answers; All multiplication questions at level 1 and 2 will involve multiplying by single digit numbers; All subtraction questions in Level 1 will give positive answers.
+  - Custom logic ensures appropriate difficulty and correct answer formats.
   - Students can submit answers and receive immediate feedback on their performance.
 
     <details>
@@ -324,15 +324,13 @@ These choices ensure that the application is not only functional but also visual
         Division Level 3
     ![Division Level 3 Question Page](images/division%20lvl%203.png)
 
-        Results Page
-    ![Results Page](images/answer%20page.png)
-
     </details>
 
 - **Admin Dashboard:**
   - Only teachers can access this page using their logins through the teacher login page.
   - Provides an overview of student performance and other relevant metrics.
   - Teachers can manage lessons, view scorecards, and handle student information from a single interface.
+  - Teachers can reset the scoreboard, clearing all student scores from the system.
 
     <details>
 
@@ -352,7 +350,6 @@ These choices ensure that the application is not only functional but also visual
 - [Create an analytics section for teachers so that they may more easily analyse students work](https://github.com/users/jftjenkins/projects/5/views/1?pane=issue&itemId=56695787)
 - Implement more lessons covering a larger range of mathematical topics.
 - Further expand on the scoreboard, and make it so that it can be filtered using a variety of different options, such as by topic, or what level students have completed.
-- Create ability for teachers to create new instances of themselves directly through the website, rather then as a Superuser.
 
 [Back to Top](#pine-hills-grammar-school---maths-department)
 
@@ -470,19 +467,19 @@ This project was deployed using Heroku and ElephantSQL. Below are the detailed s
 9. **Migrate the Database:**
     - After deploying, you need to run the database migrations. You can do this via the Heroku CLI:
       ```sh
-      heroku run python3 manage.py migrate
+      python3 manage.py migrate
       ```
 
 10. **Create a Superuser (Optional):**
     - If you need admin access to the Django admin interface, create a superuser by running:
       ```sh
-      heroku run python3 manage.py createsuperuser
+      python3 manage.py createsuperuser
       ```
 
 11. **Collect Static Files:**
     - Collect all static files by running:
       ```sh
-      heroku run python3 manage.py collectstatic --noinput
+      python3 manage.py collectstatic --noinput
       ```
 
 12. **Open the Application:**
@@ -492,9 +489,6 @@ This project was deployed using Heroku and ElephantSQL. Below are the detailed s
 
 - Make sure to regularly back up your database.
 - Use Heroku's monitoring tools to keep track of your app's performance and usage.
-- For debugging and logs, use the Heroku CLI command:
-  ```sh
-  heroku logs --tail
 
 [Back to Top](#pine-hills-grammar-school---maths-department)
 
@@ -518,7 +512,7 @@ All testing information can be found in the [TESTING.md](TESTING.md) file.
 
 ### Remaining Bugs
 
-- No known bugs remain.
+- There is an issue where sometimes, after deleting or creating a student on the dashboard, if the user logs out and then clicks on one of the sign in pages, a message will appear under the sign in pages saying "Student was successfully created/deleted". This has no affect on the user logging in, and I can't seem to locate the text and where it is coming from, or why it is appearing on the sign in page.
 
 [Back to Top](#pine-hills-grammar-school---maths-department)
 

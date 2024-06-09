@@ -1,3 +1,4 @@
+# teacher/views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
@@ -7,7 +8,7 @@ from .models import StudentForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
-
+from student.models import ScoreCard  # Import the ScoreCard model
 
 # Create your views here.
 def teacher_login(request):
@@ -101,3 +102,12 @@ def delete_student(request, student_id):
         messages.success(request, "Student deleted successfully.")
         return redirect("view_students")
     return redirect("view_students")
+
+
+@login_required
+@staff_member_required
+def reset_scoreboard(request):
+    if request.method == "POST":
+        ScoreCard.objects.all().delete()
+        messages.success(request, "Scoreboard has been reset successfully.")
+    return redirect("dashboard")

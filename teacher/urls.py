@@ -1,3 +1,4 @@
+# teacher/urls.py
 from django.urls import path
 from . import views
 
@@ -16,4 +17,5 @@ urlpatterns = [
         views.delete_student,
         name="delete_student",
     ),
+    path("reset_scoreboard/", views.reset_scoreboard, name="reset_scoreboard"),
 ]

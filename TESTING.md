@@ -4,6 +4,7 @@
 - [Lighthouse Testing](#lighthouse-testing)
 - [User Stories Testing](#user-stories-testing)
 - [Features Testing](#features-testing)
+- [Browser and Mode Testing](#browser-and-mode-testing)
 
 _____
 
@@ -423,10 +424,42 @@ ALL TESTS PASS
 | View Dashboard                | login as teacher | Dashboard displayed  |
 | Manage Users                  | navigate to user management | User management interface displayed  |
 | View Reports                  | navigate to reports | Reports displayed  |
+| Reset Scoreboard              | click reset button | Scoreboard reset, all scores cleared |
 
 ALL TESTS PASS
 
 </details>
+
+<br>
+
+[Back To Top](#table-of-contents)
+
+_____
+
+## Browser and Mode Testing
+
+The website was tested on multiple browsers to ensure compatibility and responsiveness. Additionally, tests were conducted in both light mode and dark mode to ensure a consistent user experience across different settings.
+
+### Browsers Tested
+
+- Google Chrome
+- Microsoft Edge
+- Opera
+
+### Modes Tested
+
+- Light Mode
+- Dark Mode
+
+### Test Results
+
+| Browser       | Light Mode | Dark Mode |
+| ------------- |:----------:|:---------:|
+| Chrome        | Pass       | Pass      |
+| Edge          | Pass       | Pass      |
+| Opera        | Pass       | Pass      |
+
+The website displayed consistently and functioned correctly across all tested browsers and modes.
 
 <br>
 
