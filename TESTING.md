@@ -1,11 +1,9 @@
 # Table of Contents
 
-* [Code Validation](#code-validation)
-* [Lighthouse Testing](#lighthouse-testing)
-* [Responsiveness Testing](#responsiveness-testing)
-* [Browser Compatibility Testing](#browser-compatibility-testing)
-* [User Stories Testing](#user-stories-testing)
-* [Features Testing](#features-testing)
+- [Code Validation](#code-validation)
+- [Lighthouse Testing](#lighthouse-testing)
+- [User Stories Testing](#user-stories-testing)
+- [Features Testing](#features-testing)
 
 _____
 
@@ -223,133 +221,9 @@ _____
 
 _____
 
-## Responsiveness Testing
-
-The website is responsive for screens with a minimum width of 320px and a maximum width of 2560px. Friends and family tested the website on their devices and all reported no issues with responsiveness. Further manual tests were done using Chrome's DevTools.
-
-<details>
-
-<summary>Screenshots of website at different screen sizes.</summary>
-
-**NAVBAR & HOME HERO**
-
-        Mobile - iPhone 320px
-![Navbar & Home Hero on mobile](images/nav+hero-iphone5_320.jpg)
-
-        Tablet - iPad Mini 768px
-![Navbar & Home Hero on tablet](images/nav+hero-ipadmini_768.jpg)
-
-        Desktop - Nest Hub - 1024px
-![Navbar & Home Hero on desktop](images/nav+hero-nesthub_1024.png)
-
-**FOOTER**
-
-        Mobile - Galaxy S9+ - 320px
-![Footer on mobile](images/footer-galaxys9_320.png)
-
-        Tablet - Surface Pro 7 - 912px
-![Footer on tablet](images/footer-surfacepro7_912.png)
-
-**HOME**
-
-        Mobile - Galaxy S9 - 320px
-![Home on mobile](images/home-galaxys9_320.png)
-
-        Tablet - iPad - 768px
-![Home on tablet](images/home-ipad_768.png)
- 
-        Desktop - Nest Hub Max - 1280px
-![Home on desktop](images/home-nesthubmax_1280.png)
-
-**LESSONS**
-
-        Mobile - iPhone 12 Pro -390px
-![Lessons on mobile](images/lessons-iphone12pro_390.png)
-
-        Mobile - Samsung Galaxy S20 Ultra - 412px
-![Lessons on mobile](images/lessons-samsunggals20_412.png)
-
-        Tablet - iPad Air - 820px
-![Lessons on tablet](images/lessons-ipadair_820.png)
-
-        Desktop - Nest Hub Pro - 1200px
-![Lessons on desktop](images/lessons-nesthubpro_1200.png)
-
-**SCORECARD**
-
-        Mobile - iPhone XR - 414px
-![Scorecard on mobile](images/scorecard-iphoneXR_414.png)
-
-        Tablet - Surface Pro 7 - 912px
-![Scorecard on tablet](images/scorecard-surfacepro7_912.png)
-
-        Desktop - Desktop - 1440px
-![Scorecard on desktop](images/scorecard-desktop_1440.png)
-
-**LOGIN**
-
-        Mobile - iPhone 12 Pro - 800px
-![Login on mobile](images/login-iphone12pro_380.png)
-
-        Tablet - iPad Pro - 1200px
-![Login on tablet](images/login-ipadpro_1024.png)
-
-**REGISTER**
-
-        Mobile - iPhone 6/7/8 - 375px
-![Register on mobile](images/register-iphone678_375.png)
-
-        Tablet - Surface Pro 7 - 912px
-![Register on tablet](images/register-surfacepro_812.png)
-
-        Desktop - Nest Hub Max - 1200px
-![Register on desktop](images/register-nesthubmax_1200.png)
-
-**ADMIN DASHBOARD**
-
-        Mobile - iPhone 12 Pro - 800px
-![Admin Dashboard on mobile](images/admin-dashboard-iphone12pro_380.png)
-
-        Tablet - iPad Pro - 1200px
-![Admin Dashboard on tablet](images/admin-dashboard-ipadpro_1024.png)
-
-        Desktop - Nest Hub Max - 1200px
-![Admin Dashboard on desktop](images/admin-dashboard-nesthubmax_1200.png)
-
-</details>
-
-<br>
-
-[Back To Top](#table-of-contents)
-
-_____
-
-## Browser Compatibility Testing
-
-The website was tested on current versions of Chrome, Firefox, Edge, Brave, and Safari for compatibility. It was also tested on Safari on an iPad running on iOS 12.5.7 and an iPhone on the latest iOS.
-
-<details>
-
-<summary>Table of the results.</summary>
-
-| Intended      | Chrome | Firefox | Edge | Brave | Safari iOS 12 | Safari iOS 15 |
-| ------------- | ------ | ------- | ---- | ----- | ------------- | ------------- |
-| Appearance    | Good   | Good    | Good | Good  | Poor          | Good          |
-| Responsiveness| Good   | Good    | Good | Good  | Fair          | Good          |
-
-The issue with using Safari on iOS 12 is that it doesn't support webp images, therefore all webP images were not visible.
-
-</details>
-
-<br>
-
-[Back To Top](#table-of-contents)
-
-_____
-
 ## User Stories Testing
 
-As mentioned in the Agile Methodology Section in the [README](README.md), User Stories were created in [GitHub Issues](https://github.com/jftjenkins/projects/5) which guide the process for this project all the way from Setup to Testing. Each User Story has been manually tested and the results have been collected in the tables below.
+To ensure that the project meets the needs of both students and teachers, I created detailed user stories and recorded them as GitHub Issues (see [Project](https://github.com/users/jftjenkins/projects/5) for all issues). These user stories guided the development process, ensuring that all features were implemented according to user needs. Each user story was thoroughly tested, and the results are detailed below.
 
 <details>
 
@@ -452,7 +326,7 @@ As a Student, I can access different levels of maths lessons so that I can pract
 
 | Acceptance Criteria  | Test     | Comments |
 |:--------------------:|:--------:| -------- |
-| I can access lessons of varying difficulty | Achieved | Lessons are accessible and functional |
+| I can access lessons of varying difficulty | Achieved | Lessons are scaffolded and functional |
 
 </details>
 
@@ -464,18 +338,17 @@ _____
 
 ## Features Testing
 
-Each feature listed in the [README](README.md) has been manually tested on the browsers listed in [Browser Compatibility Testing](#browser-compatibility-testing) and the results are listed in the tables below.
+Each feature listed in the [README](README.md) has been manually tested.
 
 <details>
 
 <summary>User Authentication</summary>
 
-* Unregistered / Not logged in User
+- Unregistered / Not logged in User
 
 | Feature                       | Action        | Effect                |
 | ----------------------------- | ------------- | --------------------- |
 | Login Page                    | view          | Form is displayed     |
-| Register Page                 | view          | Form is displayed     |
 | Invalid login attempt         | submit invalid details | Error message displayed |
 | Successful login              | submit valid details | Redirects to dashboard  |
 | Logout                        | click logout  | Redirects to home page  |
@@ -491,7 +364,6 @@ ALL TESTS PASS
 | Feature                       | Action        | Effect                |
 | ----------------------------- | ------------- | --------------------- |
 | View Lessons                  | click lessons link | Lessons are displayed |
-| Filter by Category            | select category | Lessons filtered by category |
 | Access Lesson                 | click lesson link | Lesson content displayed  |
 
 ALL TESTS PASS
@@ -506,7 +378,6 @@ ALL TESTS PASS
 | ----------------------------- | ------------- | --------------------- |
 | View Scorecard                | click scorecard link | Scorecard is displayed  |
 | Filter by Username            | enter username | Scorecard filtered by username |
-| View Detailed Scores          | click score link | Detailed scores displayed  |
 
 ALL TESTS PASS
 
@@ -516,7 +387,7 @@ ALL TESTS PASS
 
 <summary>User Management</summary>
 
-* Teacher
+- Teacher
 
 | Feature                       | Action        | Effect                |
 | ----------------------------- | ------------- | --------------------- |
@@ -545,11 +416,11 @@ ALL TESTS PASS
 
 <summary>Admin Dashboard</summary>
 
-* Teacher
+- Teacher
 
 | Feature                       | Action        | Effect                |
 | ----------------------------- | ------------- | --------------------- |
-| View Dashboard                | access admin panel | Dashboard displayed  |
+| View Dashboard                | login as teacher | Dashboard displayed  |
 | Manage Users                  | navigate to user management | User management interface displayed  |
 | View Reports                  | navigate to reports | Reports displayed  |
 

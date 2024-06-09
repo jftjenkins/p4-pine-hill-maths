@@ -352,6 +352,7 @@ These choices ensure that the application is not only functional but also visual
 - [Create an analytics section for teachers so that they may more easily analyse students work](https://github.com/users/jftjenkins/projects/5/views/1?pane=issue&itemId=56695787)
 - Implement more lessons covering a larger range of mathematical topics.
 - Further expand on the scoreboard, and make it so that it can be filtered using a variety of different options, such as by topic, or what level students have completed.
+- Create ability for teachers to create new instances of themselves directly through the website, rather then as a Superuser.
 
 [Back to Top](#pine-hills-grammar-school---maths-department)
 
