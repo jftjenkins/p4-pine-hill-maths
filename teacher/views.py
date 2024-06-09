@@ -53,7 +53,9 @@ def create_student(request):
             )
             new_user.save()
             messages.success(request, "Student added successfully.")
-            return redirect("create_student")
+            return redirect("create_students")  # Make sure this matches the URL name in urls.py
+        else:
+            messages.error(request, "Error creating student. Please check the form.")
     else:
         form = StudentForm()
     return render(request, "teacher/create_students.html", {"form": form})
