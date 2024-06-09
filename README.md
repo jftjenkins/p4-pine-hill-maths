@@ -538,6 +538,7 @@ Other website's that I found useful thrughout the project:
 - [Mozilla Developer Network (MDN)](https://developer.mozilla.org/): For documentation on HTML, CSS, and JavaScript to ensure best practices in web development.
 - [PythonAnywhere](https://www.pythonanywhere.com/): For initial deployment and testing of Python applications.
 - [Django Girls Tutorial](https://tutorial.djangogirls.org/en/): For a beginner-friendly guide to Django, which helped in setting up the initial structure of the project.
+- [Student Project](https://github.com/MoniPar/tailors_thimble): For helping me with my README layout and giving me the idea to use a TESTING.md file for all my tests.
 
 [Back to Top](#pine-hills-grammar-school---maths-department)
 
